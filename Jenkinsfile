@@ -4,7 +4,7 @@ println("Testing with node ")
 
 node { 
         checkout scm
-        docker.image('python:3.10.7-alpine').withRun('-e "MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306') { c ->
+        docker.image('python:3.10.7-alpine').withRun('-e "MYSQL_ROOT_PASSWORD=my-secret-pw"') { c ->
                  stage('Checkout') {
                     checkout scm
                   }
