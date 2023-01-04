@@ -2,8 +2,10 @@
 
 println("Testing with node ")
 
-node('python:3.10.7-alpine') { 
+node { 
         checkout scm
+        docker.image('mysql:5').withRun('-e "MYSQL_ROOT_PASSWORD=my-secret-pw"' +
+                                    ' -p 3306:3306') { c ->
                  stage('Checkout') {
                     checkout scm
                   }
@@ -18,6 +20,7 @@ node('python:3.10.7-alpine') {
                         echo 'I execute elsewhere'
                     }
                   } 
+        }
 // withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) {
 // sh /* WRONG! */ """
 //   set +x
